@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
   itemContainer: {
     paddingHorizontal: 8,
     borderBottomColor: "#1a759f",
-    borderBottomWidth: 1,
+    borderBottomWidth: 4,
     backgroundColor: "white",
     paddingVertical: 16,
-    color: "1a759f",
   },
   itemText: {
     fontSize: 64,
+    color: "1a759f",
     fontWeight: 200,
   }
 });
