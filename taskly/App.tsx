@@ -1,16 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity, Pressable } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { theme } from "./theme";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => console.info("Delete button pressed")}>
-        <Text >
-          Delete
-        </Text>
-      </Pressable>
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>Cofee</Text>
+        <TouchableOpacity style={styles.button} onPress={() => console.info("Delete button pressed")} activeOpacity={0.8}>
+          <Text style={styles.buttonText} >
+            Delete
+          </Text>
+        </TouchableOpacity>
       </View>
     </View >
   );
@@ -23,6 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   itemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 8,
     borderBottomColor: "#1a759f",
     borderBottomWidth: 4,
@@ -33,5 +37,16 @@ const styles = StyleSheet.create({
     fontSize: 64,
     color: "#1a759f",
     fontWeight: 200,
+  },
+  button: {
+    backgroundColor: theme.colorCerulean,
+    padding: 8,
+    borderRadius: 6,
+  },
+  buttonText: {
+    color: theme.colorWhite,
+    fontWeight: "bold",
+    textTransform: "capitalize",
+    letterSpacing: 1,
   }
 });
