@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     },
     completedText: {
         textDecorationColor: theme.colorGrey,
-        textDecorationLine: "line-through"
+        textDecorationLine: "line-through",
+        color: theme.colorGrey,
     },
     itemText: {
         fontSize: 64,
