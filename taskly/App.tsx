@@ -1,25 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { DeleteBtn } from './assets/DeleteBtn.svg';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import { theme } from "./theme";
 
 export default function App() {
+
+  const handleDelete = () => {
+    Alert.alert("Are you sure you want to delete this item?", "This can't be undone", [{
+      text: "Yes",
+      onPress: () => console.log("Ok, deleting"),
+      style: "destructive"
+    },
+    {
+      text: "Cancel",
+      onPress: () => console.log("Ok, cancelled"),
+      style: "cancel"
+    }])
+  }
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>Coffee</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => console.info("Delete button pressed")}
-          activeOpacity={0.8}
-        >
-          <DeleteBtn width={24} height={24} fill="#fff" />
+        <TouchableOpacity style={styles.button} onPress={handleDelete} activeOpacity={0.8}>
+          <Text style={styles.buttonText} >
+            Delete
+          </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </View >
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
