@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import DeleteBtn from './assets/DeleteBtn.svg';
 import { theme } from "./theme";
 
 export default function App() {
@@ -7,15 +8,18 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>Coffee</Text>
-        <TouchableOpacity style={styles.button} onPress={() => console.info("Delete button pressed")} activeOpacity={0.8}>
-          <Text style={styles.buttonText} >
-            Delete
-          </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => console.info("Delete button pressed")}
+          activeOpacity={0.8}
+        >
+          <DeleteBtn width={24} height={24} fill="#fff" />
         </TouchableOpacity>
       </View>
-    </View >
+    </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     backgroundColor: "white",
     paddingVertical: 16,
-    width: "100%"
+    width: "100%",
   },
   itemText: {
     fontSize: 64,
