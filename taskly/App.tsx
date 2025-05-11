@@ -1,9 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Pressable } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Pressable onPress={() => console.info("Delete button pressed")}>
+        <Text >
+          Delete
+        </Text>
+      </Pressable>
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>Cofee</Text>
       </View>
