@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import DeleteBtn from './assets/DeleteBtn.svg';
+import { DeleteBtn } from './assets/DeleteBtn.svg';
 import { theme } from "./theme";
 
 export default function App() {
