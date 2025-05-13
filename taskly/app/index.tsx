@@ -6,7 +6,7 @@ import { Link } from "expo-router";
 export default function App() {
     return (
         <View style={styles.container}>
-            <Link href="/counter" style={{ textAlign: "center", marginBottom: 18, fontSize: 24, color: theme.colorCerulean }}>Go to counter</Link>
+            <Link href="/counter" style={{ textAlign: "center", marginBottom: 18, fontSize: 48, color: theme.colorCerulean }}>Go to counter</Link>
             <ShoppingListItem name="coffee" isCompleted />
             <ShoppingListItem name="tea" />
             <ShoppingListItem name="sugar" />
