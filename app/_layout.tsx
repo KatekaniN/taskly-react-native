@@ -6,13 +6,14 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 export default function Layout() {
     return (
-        <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorCerulean, tabBarInactiveTintColor: theme.colorGrey, headerShown: false }}>
+        <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorCerulean, tabBarInactiveTintColor: theme.colorGrey }}>
             <Tabs.Screen name="index" options={{
                 title: "Shopping List", tabBarIcon: ({ color, size }) => {
                     return <Feather name="list" size={size} color={color} />
                 }
             }} />
             <Tabs.Screen name="counter" options={{
+                headerShown: false,
                 title: "Counter", tabBarIcon: ({ color, size }) => {
                     return <AntDesign name="clockcircleo" size={size} color={color} />
                 }
