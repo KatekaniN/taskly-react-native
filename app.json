@@ -13,6 +13,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "fonts": [
+      {
+        "asset": "@expo/vector-icons/fonts/MaterialIcons.ttf"
+      }
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -28,13 +33,6 @@
     },
     "plugins": [
       "expo-router"
-    ]
-  },
-  "expo": {
-    "fonts": [
-      {
-        "asset": "@expo/vector-icons/fonts/MaterialIcons.ttf"
-      }
     ]
   }
 }
