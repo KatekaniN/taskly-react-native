@@ -10,7 +10,7 @@ export default function Layout() {
                 title: "Counter", headerRight: () => {
                     return <Link href="/counter/history" asChild>
                         <Pressable hitSlop={20}>
-                            <FontAwesome5 name="history" size={32} color={theme.colorGrey} />
+                            <FontAwesome5 name="history" size={84} color={theme.colorGrey} />
                         </Pressable>
                     </Link>
                 }
