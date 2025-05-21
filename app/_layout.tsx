@@ -13,7 +13,7 @@ export default function Layout() {
             }} />
             <Tabs.Screen name="counter" options={{
                 title: "Counter", tabBarIcon: ({ color, size }) => {
-                    return <AntDesign name="pluscircle" size={size} color={color} />
+                    return <AntDesign name="clockcircleo" size={size} color={color} />
                 }
             }} />
             <Tabs.Screen name="idea" options={{
