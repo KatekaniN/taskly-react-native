@@ -1,11 +1,12 @@
 import { Tabs } from "expo-router";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import theme from "../theme";
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 export default function Layout() {
     return (
-        <Tabs >
+        <Tabs screenOptions={{tabBarActiveTintColor: theme.colorCerulean, tabBarInactiveTintColor: theme.colorGray, headerShown: false}}>
             <Tabs.Screen name="index" options={{
                 title: "Shopping List", tabBarIcon: ({ color, size }) => {
                     return <Feather name="list" size={size} color={color} />
