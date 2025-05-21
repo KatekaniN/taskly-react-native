@@ -1,20 +1,21 @@
 import { Stack, Link } from "expo-router";
 import { theme } from "../../theme";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Pressable } from "react-native";
+import { useRouter } from 'expo-router';
 
 export default function Layout() {
+
+    const router = useRouter();
     return (
         <Stack>
             < Stack.Screen name="index" options={{
                 title: "Counter", headerRight: () => {
-                    return <Link href="/counter/history" asChild>
-                        <Pressable hitSlop={20} style={{ paddingRight: 10 }}>
-                            <MaterialIcons name="history" size={32} color={theme.colorGrey} />
-                        </Pressable>
-                    </Link>
+                    return <Pressable onPress={() => router.push('/counter/history')} style={{ paddingRight: 10 }} hitSlop={20}>
+                        <FontAwesome5 name="history" size={24} color={theme.colorGrey} />
+                    </Pressable>
                 }
             }} />
-        </Stack>
+        </Stack >
     )
 }
