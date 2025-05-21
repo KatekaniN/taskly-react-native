@@ -16,6 +16,15 @@
     "fonts": [
       {
         "asset": "@expo/vector-icons/fonts/MaterialIcons.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/FontAwesome5_Regular.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/FontAwesome5_Solid.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/FontAwesome5_Brands.ttf"
       }
     ],
     "ios": {
