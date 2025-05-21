@@ -7,7 +7,7 @@ type Props = {
     isCompleted?: boolean
 }
 
-export function ShoppingListItem({ name, isCompleted }: Props) {
+export default function ShoppingListItem({ name, isCompleted }: Props) {
     const handleDelete = () => {
         Alert.alert(`Are you sure you want to delete this ${name}?`, "This can't be undone", [{
             text: "Yes",
