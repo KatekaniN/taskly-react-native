@@ -9,7 +9,7 @@ export default function Layout() {
             < Stack.Screen name="index" options={{
                 title: "Counter", headerRight: () => {
                     return <Link href="/counter/history" asChild>
-                        <Pressable hitSlop={20} style={{ padding: 10 }}>
+                        <Pressable hitSlop={20} style={{ paddingRight: 10 }}>
                             <MaterialIcons name="history" size={32} color={theme.colorGrey} />
                         </Pressable>
                     </Link>
