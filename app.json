@@ -29,5 +29,12 @@
     "plugins": [
       "expo-router"
     ]
+  },
+  "expo": {
+    "fonts": [
+      {
+        "asset": "@expo/vector-icons/fonts/MaterialIcons.ttf"
+      }
+    ]
   }
 }
