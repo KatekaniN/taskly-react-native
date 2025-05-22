@@ -18,6 +18,15 @@
         "asset": "@expo/vector-icons/fonts/MaterialIcons.ttf"
       },
       {
+        "asset": "@expo/vector-icons/fonts/MaterialCommunityIcons.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/Ionicons.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/FontAwesome.ttf"
+      },
+      {
         "asset": "@expo/vector-icons/fonts/FontAwesome5_Regular.ttf"
       },
       {
@@ -25,6 +34,15 @@
       },
       {
         "asset": "@expo/vector-icons/fonts/FontAwesome5_Brands.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/AntDesign.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/Entypo.ttf"
+      },
+      {
+        "asset": "@expo/vector-icons/fonts/Feather.ttf"
       }
     ],
     "ios": {
@@ -41,7 +59,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ]
   }
 }
