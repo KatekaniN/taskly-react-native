@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         color: theme.colorGrey,
     },
     itemText: {
-        fontSize: 64,
+        fontSize: 40,
         color: "#1a759f",
         fontWeight: 200,
     },
