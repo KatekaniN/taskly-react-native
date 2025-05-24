@@ -1,8 +1,14 @@
-import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation } from "react-native";
+import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation, Platform, UIManager } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
 import { useState, useRef, useEffect, use } from "react";
 import { getFromStorage, saveToStorage } from "../utils/storage"; // Importing utility functions for storage
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 type ShoppingListItemType = {
   id: string;
@@ -35,7 +41,7 @@ export default function App() {
       ];
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setShoppingList(newShoppingList);
-      saveToStorage(storageKey, shoppingList);
+      saveToStorage(storageKey, newShoppingList); // Save the new list, not the old one
       setInput("");
     }
   };
@@ -43,9 +49,9 @@ export default function App() {
   const handleDelete = (id: string) => {
     const newShoppingList = shoppingList.filter(
       (item) => item.id !== id)
-    saveToStorage(storageKey, shoppingList);
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
+    saveToStorage(storageKey, newShoppingList); // Save the new list
   }
 
   function orderShoppingList(shoppingList: ShoppingListItemType[]) {
@@ -81,17 +87,24 @@ export default function App() {
       }
       return item;
     })
-    saveToStorage(storageKey, shoppingList);
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
+    saveToStorage(storageKey, newShoppingList); // Save the new list
   }
 
   useEffect(() => {
     const fetchInitial = async () => {
-      const data = await getFromStorage(storageKey);
-      if (data) {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        setShoppingList(data);
+      try {
+        const data = await getFromStorage(storageKey);
+        if (data) {
+          // Only animate if there's actual data to show
+          if (data.length > 0) {
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+          }
+          setShoppingList(data);
+        }
+      } catch (error) {
+        console.error("Failed to load shopping list:", error);
       }
     };
     fetchInitial();
