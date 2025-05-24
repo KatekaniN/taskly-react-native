@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, TextInput, Text } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type ShoppingListItemType = {
   id: string;
@@ -18,14 +18,26 @@ export default function App() {
   const [shoppingList, setShoppingList] = useState<ShoppingListItemType[]>([]);
   const [input, setInput] = useState("");
 
+  // Debug effect to monitor state changes
+  useEffect(() => {
+    console.log("Shopping list updated:", shoppingList);
+  }, [shoppingList]);
+
   const handleSubmit = () => {
+    console.log("Submit pressed with input:", input);
+
     if (input.trim()) {
-      // Use the functional form of setState to ensure we're working with the latest state
-      setShoppingList(currentList => [
-        { id: new Date().toISOString(), name: input.trim() },
-        ...currentList
-      ]);
+      // Create a new item with a more reliable ID
+      const newItem = {
+        id: Math.random().toString(36).substring(2, 9),
+        name: input.trim()
+      };
+
+      // Update using functional form to ensure we have the latest state
+      setShoppingList(prevList => [newItem, ...prevList]);
       setInput("");
+
+      console.log("Added new item:", newItem);
     }
   };
 
@@ -35,7 +47,7 @@ export default function App() {
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
-        onChangeText={setInput}
+        onChangeText={text => setInput(text)}
         returnKeyType="done"
         autoCorrect={true}
         onSubmitEditing={handleSubmit}
