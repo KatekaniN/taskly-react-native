@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TextInput } from "react-native";
+import { StyleSheet, View, FlatList, TextInput, Text } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
 import { useState } from "react";
@@ -52,12 +52,8 @@ export default function App() {
         data={shoppingList} // prop of Flatlist to get data to render
         style={styles.listContainer}
         ListEmptyComponent={() => (
-          <View>
-            <TextInput
-              placeholder="No items in the list"
-              style={styles.textInput}
-              editable={false}
-            />
+          <View style={styles.listEmptyContainer}>
+            <Text>Your shopping list is empty</Text>
           </View>
         )}
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
