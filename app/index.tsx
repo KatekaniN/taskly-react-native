@@ -56,7 +56,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <TextInput // keep outside of FlatList so it doesn't get re-rendered every time the list changes
+      <TextInput
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
@@ -67,20 +67,27 @@ export default function App() {
         autoCapitalize="words"
         autoFocus
       />
-      <FlatList  // best for items we are mapping over vs scrollview
-        ref={flatListRef} // ref to the FlatList to access its methods
-        key={flatListKey} // key to force re-render of FlatList when shoppingList changes
-        data={shoppingList} // prop of Flatlist to get data to render
+      <FlatList
+        ref={flatListRef}
+        key={flatListKey}
+        data={shoppingList}
         style={styles.listContainer}
         ListEmptyComponent={() => (
           <View style={styles.listEmptyContainer}>
             <Text>Your shopping list is empty</Text>
           </View>
         )}
-        stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
+        stickyHeaderIndices={[0]}
         contentContainerStyle={styles.contentContainer}
-        renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem key={item.id} name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimeStamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+        keyExtractor={item => item.id}  // Add this line for better list management
+        renderItem={({ item }) => (
+          <ShoppingListItem
+            key={item.id}  // Add this key prop
+            name={item.name}
+            onDelete={() => handleDelete(item.id)}
+            isCompleted={Boolean(item.completedAtTimeStamp)}
+            onToggleComplete={() => handleToggleComplete(item.id)}
+          />
         )}
       />
     </View>
