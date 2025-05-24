@@ -6,7 +6,8 @@ import { useState, useRef, useEffect } from "react";
 type ShoppingListItemType = {
   id: string;
   name: string;
-  completedAtTimeStamp?: number;
+  completedAtTimestamp?: number;
+  lastUpdatedTimestamp: number;
 };
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
   const handleSubmit = () => {
     if (input) {
       const newShoppingList = [
-        { id: new Date().toTimeString(), name: input },
+        { id: new Date().toTimeString(), name: input, lastUpdatedTimestamp: Date.now() },
         ...shoppingList,
       ];
       setShoppingList(newShoppingList);
@@ -40,12 +41,35 @@ export default function App() {
     setShoppingList(newShoppingList);
   }
 
+  function orderShoppingList(shoppingList: ShoppingListItemType[]) {
+    return shoppingList.sort((item1, item2) => {
+      if (item1.completedAtTimestamp && item2.completedAtTimestamp) {
+        return item2.completedAtTimestamp - item1.completedAtTimestamp;
+      }
+
+      if (item1.completedAtTimestamp && !item2.completedAtTimestamp) {
+        return 1;
+      }
+
+      if (!item1.completedAtTimestamp && item2.completedAtTimestamp) {
+        return -1;
+      }
+
+      if (!item1.completedAtTimestamp && !item2.completedAtTimestamp) {
+        return item2.lastUpdatedTimestamp - item1.lastUpdatedTimestamp;
+      }
+
+      return 0;
+    });
+  }
+
   const handleToggleComplete = (id: string) => {
     const newShoppingList = shoppingList.map((item) => {
       if (item.id === id) {
         return {
           ...item,
-          completedAtTimeStamp: item.completedAtTimeStamp ? undefined : Date.now(),
+          lastUpdatedTimestamp: Date.now(),
+          completedAtTimestamp: item.completedAtTimestamp ? undefined : Date.now(),
         };
       }
       return item;
@@ -70,7 +94,7 @@ export default function App() {
       <FlatList  // best for items we are mapping over vs scrollview
         ref={flatListRef} // ref to the FlatList to access its methods
         key={flatListKey} // key to force re-render of FlatList when shoppingList changes
-        data={shoppingList} // prop of Flatlist to get data to render
+        data={orderShoppingList(shoppingList)} // prop of Flatlist to get data to render
         style={styles.listContainer}
         ListEmptyComponent={() => (
           <View style={styles.listEmptyContainer}>
@@ -80,7 +104,7 @@ export default function App() {
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem key={item.id} name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimeStamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+          <ShoppingListItem key={item.id} name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimestamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>
