@@ -79,7 +79,9 @@ const styles = StyleSheet.create({
         gap: 12,
         flex: 1,
     },
-    check: {
-        marginTop: 4,
+    checkContainer: {
+        height: 40,
+        justifyContent: "center",
+        paddingBottom: 4,
     }
 });
