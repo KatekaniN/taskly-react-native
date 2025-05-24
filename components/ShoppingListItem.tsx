@@ -4,29 +4,37 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 type Props = {
     name: string;
-    isCompleted?: boolean
+    isCompleted?: boolean;
     onToggleComplete: () => void;
     onDelete: () => void;
 }
 
 export default function ShoppingListItem({ name, isCompleted, onDelete, onToggleComplete }: Props) {
     const handleDelete = () => {
-        Alert.alert(`Are you sure you want to delete this ${name}?`, "This can't be undone", [{
-            text: "Yes",
-            onPress: () => onDelete(),
-            style: "destructive"
-        },
-        {
-            text: "Cancel",
-            onPress: () => console.log("Ok, cancelled"),
-            style: "cancel"
-        }])
+        Alert.alert(
+            `Are you sure you want to delete this ${name}?`,
+            "This can't be undone",
+            [
+                { text: "Yes", onPress: () => onDelete(), style: "destructive" },
+                { text: "Cancel", onPress: () => console.log("Ok, cancelled"), style: "cancel" }
+            ]
+        )
     }
+
     return (
-        <Pressable style={[styles.itemContainer, isCompleted ? styles.completedContainer : undefined]}>
-            <Text style={[styles.itemText, isCompleted ? styles.completedText : undefined]}>{name}</Text>
-            <TouchableOpacity onPress={handleDelete} activeOpacity={0.9}>
-                <AntDesign name="closecircle" size={24} color={isCompleted ? theme.colorGrey : theme.colorRed} />
+        <Pressable
+            onPress={onToggleComplete}
+            style={[styles.itemContainer, isCompleted ? styles.completedContainer : undefined]}
+        >
+            <Text style={[styles.itemText, isCompleted ? styles.completedText : undefined]}>
+                {name}
+            </Text>
+            <TouchableOpacity onPress={handleDelete}>
+                <AntDesign
+                    name="closecircle"
+                    size={24}
+                    color={isCompleted ? theme.colorGrey : theme.colorRed}
+                />
             </TouchableOpacity>
         </Pressable>
     )
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 40,
         color: "#1a759f",
-        fontWeight: 200,
+        fontWeight: "200",
     },
-
 });
