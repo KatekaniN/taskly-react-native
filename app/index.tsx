@@ -15,9 +15,7 @@ const initialList: ShoppingListItemType[] = [
 ];
 
 export default function App() {
-  const [shoppingList, setShoppingList] =
-    useState<ShoppingListItemType[]>([]);
-
+  const [shoppingList, setShoppingList] = useState<ShoppingListItemType[]>([]);
   const [input, setInput] = useState("");
 
   const handleTextChange = (text: string) => {
@@ -26,37 +24,40 @@ export default function App() {
 
   const handleSubmit = () => {
     if (input) {
-      const newItem = { id: new Date().toTimeString(), name: input };
-      setShoppingList([newItem, ...shoppingList]);
+      const newShoppingList = [
+        { id: new Date().toTimeString(), name: input },
+        ...shoppingList,
+      ];
+      setShoppingList(newShoppingList);
       setInput("");
     }
   };
 
   return (
     <View style={styles.container}>
-      <TextInput // keep outside of FlatList so it doesn't get re-rendered every time the list changes
+      <TextInput
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
-        onChangeText={handleTextChange} // Use handleTextChange here
+        onChangeText={handleTextChange}
         returnKeyType="done"
         autoCorrect={true}
         onSubmitEditing={handleSubmit}
         autoCapitalize="words"
         autoFocus
       />
-      <FlatList  // best for items we are mapping over vs scrollview
-        data={shoppingList} // prop of Flatlist to get data to render
+      <FlatList
+        data={shoppingList}
         style={styles.listContainer}
         ListEmptyComponent={() => (
           <View style={styles.listEmptyContainer}>
             <Text>Your shopping list is empty</Text>
           </View>
         )}
-        stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
+        stickyHeaderIndices={[0]}
         contentContainerStyle={styles.contentContainer}
-        renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem name={item.name} key={item.id} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+        renderItem={({ item }) => (
+          <ShoppingListItem name={item.name} key={item.id} />
         )}
       />
     </View>
