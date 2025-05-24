@@ -8,12 +8,6 @@ type ShoppingListItemType = {
   name: string;
 };
 
-const initialList: ShoppingListItemType[] = [
-  { id: "1", name: "Coffee" },
-  { id: "2", name: "Tea" },
-  { id: "3", name: "Milk" },
-];
-
 export default function App() {
   const [shoppingList, setShoppingList] =
     useState<ShoppingListItemType[]>([]);
@@ -28,11 +22,6 @@ export default function App() {
     }
   }, [shoppingList]);
 
-
-  const handleTextChange = (text: string) => {
-    setInput(text);
-  };
-
   const handleSubmit = () => {
     if (input) {
       const newShoppingList = [
@@ -43,6 +32,12 @@ export default function App() {
       setInput("");
     }
   };
+
+  const handleDelete = (id: string) => {
+    const newShoppingList = shoppingList.filter(
+      (item) => item.id !== id)
+    setShoppingList(newShoppingList);
+  }
 
   const flatListKey = `flatlist-${shoppingList.length}`;
 
@@ -72,7 +67,7 @@ export default function App() {
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem name={item.name} key={item.id} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+          <ShoppingListItem name={item.name} onDelete={() => handleDelete(item.id)} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>
