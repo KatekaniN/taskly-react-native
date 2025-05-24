@@ -44,6 +44,8 @@ export default function App() {
     }
   };
 
+  const flatListKey = `flatlist-${shoppingList.length}`;
+
   return (
     <View style={styles.container}>
       <TextInput // keep outside of FlatList so it doesn't get re-rendered every time the list changes
@@ -58,6 +60,8 @@ export default function App() {
         autoFocus
       />
       <FlatList  // best for items we are mapping over vs scrollview
+        ref={flatListRef} // ref to the FlatList to access its methods
+        key={flatListKey} // key to force re-render of FlatList when shoppingList changes
         data={shoppingList} // prop of Flatlist to get data to render
         style={styles.listContainer}
         ListEmptyComponent={() => (
