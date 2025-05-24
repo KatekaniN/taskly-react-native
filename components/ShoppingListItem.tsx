@@ -28,7 +28,7 @@ export default function ShoppingListItem({ name, isCompleted, onDelete, onToggle
             style={[styles.itemContainer, isCompleted ? styles.completedContainer : undefined]}
         >
             <View style={styles.row}>
-                <Entypo name={isCompleted ? "check" : "circle"} size={24} color={isCompleted ? theme.colorGrey : theme.colorCerulean} />
+                <Entypo style={styles.check} name={isCompleted ? "check" : "circle"} size={24} color={isCompleted ? theme.colorGrey : theme.colorCerulean} />
                 <Text style={[styles.itemText, isCompleted ? styles.completedText : undefined]}>
                     {name}
                 </Text>
@@ -76,7 +76,10 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        gap: 8,
+        gap: 12,
         flex: 1,
+    },
+    check: {
+        marginTop: 4,
     }
 });
