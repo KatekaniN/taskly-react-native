@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, TextInput, Text } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type ShoppingListItemType = {
   id: string;
@@ -15,69 +15,60 @@ const initialList: ShoppingListItemType[] = [
 ];
 
 export default function App() {
-  const [shoppingList, setShoppingList] = useState<ShoppingListItemType[]>([]);
-  const [input, setInput] = useState("");
-  const flatListRef = useRef<FlatList | null>(null);
+  const [shoppingList, setShoppingList] =
+    useState<ShoppingListItemType[]>([]);
 
-  // Force FlatList to update when shoppingList changes
+  const flatListRef = useRef<FlatList>(null);
+
+  const [input, setInput] = useState("");
+
   useEffect(() => {
     if (flatListRef.current) {
-      // This will force the FlatList to re-render
       flatListRef.current.forceUpdate?.();
     }
-    console.log("Shopping list updated:", shoppingList);
   }, [shoppingList]);
 
+
+  const handleTextChange = (text: string) => {
+    setInput(text);
+  };
+
   const handleSubmit = () => {
-    console.log("Submit pressed with input:", input);
-
-    if (input.trim()) {
-      // Create a new item with a more reliable ID
-      const newItem = {
-        id: Date.now().toString(),
-        name: input.trim()
-      };
-
-      // Update using functional form to ensure we have the latest state
-      setShoppingList(prevList => [newItem, ...prevList]);
+    if (input) {
+      const newShoppingList = [
+        { id: new Date().toTimeString(), name: input },
+        ...shoppingList,
+      ];
+      setShoppingList(newShoppingList);
       setInput("");
-
-      console.log("Added new item:", newItem);
     }
   };
 
-  // Key for the entire FlatList to force re-render
-  const flatListKey = `flatlist-${shoppingList.length}`;
-
   return (
     <View style={styles.container}>
-      <TextInput
+      <TextInput // keep outside of FlatList so it doesn't get re-rendered every time the list changes
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
-        onChangeText={text => setInput(text)}
+        onChangeText={setInput}
         returnKeyType="done"
         autoCorrect={true}
         onSubmitEditing={handleSubmit}
         autoCapitalize="words"
         autoFocus
       />
-      <FlatList
-        ref={flatListRef}
-        key={flatListKey}
-        data={shoppingList}
+      <FlatList  // best for items we are mapping over vs scrollview
+        data={shoppingList} // prop of Flatlist to get data to render
         style={styles.listContainer}
-        keyExtractor={item => item.id}
-        extraData={shoppingList.length}
         ListEmptyComponent={() => (
           <View style={styles.listEmptyContainer}>
             <Text>Your shopping list is empty</Text>
           </View>
         )}
-        stickyHeaderIndices={[0]}
+        stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
-        renderItem={({ item }) => (
-          <ShoppingListItem name={item.name} key={item.id} />
+        renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
+          <ShoppingListItem name={item.name} key={item.id} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>
