@@ -16,7 +16,7 @@ const initialList: ShoppingListItemType[] = [
 
 export default function App() {
   const [shoppingList, setShoppingList] =
-    useState<ShoppingListItemType[]>(initialList);
+    useState<ShoppingListItemType[]>([]);
 
   const [input, setInput] = useState("");
 
@@ -90,6 +90,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colorWhite,
     fontSize: 18,
     borderRadius: 50,
+  },
+  listEmptyContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 18
   },
   contentContainer: {
     paddingBottom: 24,
