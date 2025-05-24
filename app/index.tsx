@@ -26,11 +26,8 @@ export default function App() {
 
   const handleSubmit = () => {
     if (input) {
-      const newShoppingList = [
-        { id: new Date().toTimeString(), name: input },
-        ...shoppingList,
-      ];
-      setShoppingList(newShoppingList);
+      const newItem = { id: new Date().toTimeString(), name: input };
+      setShoppingList([newItem, ...shoppingList]);
       setInput("");
     }
   };
@@ -41,7 +38,7 @@ export default function App() {
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
-        onChangeText={setInput}
+        onChangeText={handleTextChange} // Use handleTextChange here
         returnKeyType="done"
         autoCorrect={true}
         onSubmitEditing={handleSubmit}
