@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <TextInput
+      <TextInput // keep outside of FlatList so it doesn't get re-rendered every time the list changes
         placeholder="E.g Coffee"
         style={styles.textInput}
         value={input}
@@ -48,12 +48,13 @@ export default function App() {
         autoCapitalize="words"
         autoFocus
       />
-      <FlatList
-        data={shoppingList}
+      <FlatList  // best for items we are mapping over vs scrollview
+        data={shoppingList} // prop of Flatlist to get data to render
         style={styles.listContainer}
+        stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
-        renderItem={({ item }) => (
-          <ShoppingListItem name={item.name} key={item.id} />
+        renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
+          <ShoppingListItem name={item.name} key={item.id} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>
