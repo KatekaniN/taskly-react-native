@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TextInput, Text } from "react-native";
+import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
 import { useState, useRef, useEffect, use } from "react";
@@ -11,7 +11,7 @@ type ShoppingListItemType = {
   lastUpdatedTimestamp: number;
 };
 
-const storageKey = "shopping-list"; // Key for storing the shopping list in AsyncStorage
+const storageKey = "shopping-list";
 
 export default function App() {
   const [shoppingList, setShoppingList] =
@@ -33,8 +33,9 @@ export default function App() {
         { id: new Date().toTimeString(), name: input, lastUpdatedTimestamp: Date.now() },
         ...shoppingList,
       ];
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setShoppingList(newShoppingList);
-      saveToStorage(storageKey, shoppingList); // Save the updated shopping list to AsyncStorage
+      saveToStorage(storageKey, shoppingList);
       setInput("");
     }
   };
@@ -43,6 +44,7 @@ export default function App() {
     const newShoppingList = shoppingList.filter(
       (item) => item.id !== id)
     saveToStorage(storageKey, shoppingList);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
   }
 
@@ -80,6 +82,7 @@ export default function App() {
       return item;
     })
     saveToStorage(storageKey, shoppingList);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
   }
 
@@ -87,6 +90,7 @@ export default function App() {
     const fetchInitial = async () => {
       const data = await getFromStorage(storageKey);
       if (data) {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setShoppingList(data);
       }
     };
