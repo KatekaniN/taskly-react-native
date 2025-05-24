@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     },
     checkContainer: {
         justifyContent: "center",
-        paddingTop: 10,
+        paddingTop: 14,
     }
 });
