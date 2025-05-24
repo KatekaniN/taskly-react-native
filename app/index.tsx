@@ -80,7 +80,7 @@ export default function App() {
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimeStamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+          <ShoppingListItem key={item.id} name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimeStamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>
