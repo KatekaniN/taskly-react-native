@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, TextInput, Text } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type ShoppingListItemType = {
   id: string;
@@ -17,9 +17,14 @@ const initialList: ShoppingListItemType[] = [
 export default function App() {
   const [shoppingList, setShoppingList] = useState<ShoppingListItemType[]>([]);
   const [input, setInput] = useState("");
+  const flatListRef = useRef<FlatList | null>(null);
 
-  // Debug effect to monitor state changes
+  // Force FlatList to update when shoppingList changes
   useEffect(() => {
+    if (flatListRef.current) {
+      // This will force the FlatList to re-render
+      flatListRef.current.forceUpdate?.();
+    }
     console.log("Shopping list updated:", shoppingList);
   }, [shoppingList]);
 
@@ -29,7 +34,7 @@ export default function App() {
     if (input.trim()) {
       // Create a new item with a more reliable ID
       const newItem = {
-        id: Math.random().toString(36).substring(2, 9),
+        id: Date.now().toString(),
         name: input.trim()
       };
 
@@ -40,6 +45,9 @@ export default function App() {
       console.log("Added new item:", newItem);
     }
   };
+
+  // Key for the entire FlatList to force re-render
+  const flatListKey = `flatlist-${shoppingList.length}`;
 
   return (
     <View style={styles.container}>
@@ -55,9 +63,12 @@ export default function App() {
         autoFocus
       />
       <FlatList
+        ref={flatListRef}
+        key={flatListKey}
         data={shoppingList}
         style={styles.listContainer}
         keyExtractor={item => item.id}
+        extraData={shoppingList.length}
         ListEmptyComponent={() => (
           <View style={styles.listEmptyContainer}>
             <Text>Your shopping list is empty</Text>
