@@ -51,6 +51,15 @@ export default function App() {
       <FlatList  // best for items we are mapping over vs scrollview
         data={shoppingList} // prop of Flatlist to get data to render
         style={styles.listContainer}
+        ListEmptyComponent={() => (
+          <View>
+            <TextInput
+              placeholder="No items in the list"
+              style={styles.textInput}
+              editable={false}
+            />
+          </View>
+        )}
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
