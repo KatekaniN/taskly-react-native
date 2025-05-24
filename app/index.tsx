@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 type ShoppingListItemType = {
   id: string;
   name: string;
+  completedAtTimeStamp?: number;
 };
 
 export default function App() {
@@ -39,6 +40,18 @@ export default function App() {
     setShoppingList(newShoppingList);
   }
 
+  const handleToggleComplete = (id: string) => {
+    const newShoppingList = shoppingList.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          completedAtTimeStamp: item.completedAtTimeStamp ? undefined : Date.now(),
+        };
+      }
+      return item;
+    })
+    setShoppingList(newShoppingList);
+  }
   const flatListKey = `flatlist-${shoppingList.length}`;
 
   return (
@@ -67,7 +80,7 @@ export default function App() {
         stickyHeaderIndices={[0]} // prop of Flatlist to make the header sticky
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => (  // renderItem is a function that takes an item from the data array and returns a component to render
-          <ShoppingListItem name={item.name} onDelete={() => handleDelete(item.id)} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
+          <ShoppingListItem name={item.name} onDelete={() => handleDelete(item.id)} isCompleted={Boolean(item.completedAtTimeStamp)} onToggleComplete={() => { handleToggleComplete(item.id) }} /> // ShoppingListItem is a component that takes a name prop and a key prop as defined above
         )}
       />
     </View>

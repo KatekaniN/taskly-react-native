@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Pressable } from "react-native";
 import { theme } from "../theme"
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 type Props = {
     name: string;
     isCompleted?: boolean
+    onToggleComplete: () => void;
     onDelete: () => void;
 }
 
-export default function ShoppingListItem({ name, isCompleted, onDelete }: Props) {
+export default function ShoppingListItem({ name, isCompleted, onDelete, onToggleComplete }: Props) {
     const handleDelete = () => {
         Alert.alert(`Are you sure you want to delete this ${name}?`, "This can't be undone", [{
             text: "Yes",
@@ -22,12 +23,12 @@ export default function ShoppingListItem({ name, isCompleted, onDelete }: Props)
         }])
     }
     return (
-        <View style={[styles.itemContainer, isCompleted ? styles.completedContainer : undefined]}>
+        <Pressable style={[styles.itemContainer, isCompleted ? styles.completedContainer : undefined]}>
             <Text style={[styles.itemText, isCompleted ? styles.completedText : undefined]}>{name}</Text>
             <TouchableOpacity onPress={handleDelete} activeOpacity={0.9}>
                 <AntDesign name="closecircle" size={24} color={isCompleted ? theme.colorGrey : theme.colorRed} />
             </TouchableOpacity>
-        </View>
+        </Pressable>
     )
 }
 
