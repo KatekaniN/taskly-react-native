@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         letterSpacing: 1,
-
+        color: theme.colorGrey,
         fontWeight: "bold",
         textTransform: "uppercase",
     },
     button: {
-
+        backgroundColor: theme.colorCerulean,
         padding: 16,
         borderRadius: 8,
     }
