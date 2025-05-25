@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { theme } from "../../theme";
 import { registerForPushNotificationsAsync } from "../../utils/registerForPushNotificationsAsync";
+import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 
 export default function CounterScreen() {
@@ -18,8 +19,11 @@ export default function CounterScreen() {
             });
         }
         else {
-            Alert.alert("Unable to schedule notification",
-                "Enable the notifications permission for Expo Go in settings",);
+            if (Device.isDevice) {
+                Alert.alert("Unable to schedule notification",
+                    "Enable the notifications permission for this app in settings",);
+            }
+
         }
     }
     return (
