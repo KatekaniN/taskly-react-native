@@ -17,9 +17,9 @@ export default function Layout() {
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    paddingTop:-10, 
-                                    paddingHorizontal: 10, 
-                                    minWidth: 48, 
+                                    marginTop: -4, // Move the entire button up slightly
+                                    paddingHorizontal: 10,
+                                    minWidth: 48,
                                     justifyContent: 'center'
                                 }}
                             >
