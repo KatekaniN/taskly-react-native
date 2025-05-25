@@ -1,6 +1,6 @@
 import { Stack, Link } from "expo-router";
 import { theme } from "../../theme";
-import { Pressable, View, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function Layout() {
@@ -11,39 +11,27 @@ export default function Layout() {
                 options={{
                     title: "Counter",
                     headerRight: () => (
-                        <View style={styles.headerRightContainer}>
-                            <Link href="/counter/history" asChild>
-                                <Pressable
-                                    hitSlop={32}
-                                    style={styles.historyButton}
-                                >
-                                    <FontAwesome5
-                                        name="history"
-                                        size={22}
-                                        color={theme.colorGrey}
-                                    />
-                                </Pressable>
-                            </Link>
-                        </View>
+                        <Link href="/counter/history" asChild>
+                            <Pressable
+                                hitSlop={32}
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    paddingHorizontal: 16, // Use padding instead of margins
+                                    minWidth: 44, // Ensure adequate touch target
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <FontAwesome5
+                                    name="history"
+                                    size={22}
+                                    color={theme.colorGrey}
+                                />
+                            </Pressable>
+                        </Link>
                     )
                 }}
             />
         </Stack>
     );
 }
-
-const styles = StyleSheet.create({
-    headerRightContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingRight: 16,
-    },
-    historyButton: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 8,
-    }
-});
