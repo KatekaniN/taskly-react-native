@@ -1,19 +1,19 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { theme } from "../../theme";
-import { registerForPushNotificationsAsync } from "../../utils/registerForPushNotificationsAsync";
+/*import { registerForPushNotificationsAsync } from "../../utils/registerForPushNotificationsAsync";*/
 
 export default function CounterScreen() {
-    const handleRequestPermission = async () => {
+    /*const handleRequestPermission = async () => {
         const result = await registerForPushNotificationsAsync();
         console.log("Notification permission status:", result);
-    }
+    }*/
     return (
         <View style={styles.container}>
             <Text style={styles.buttonText}>Request Permission</Text>
-            <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handleRequestPermission}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.button} /* onPress={handleRequestPermission} */>
                 <Text style={styles.buttonText}>Request Permission</Text>
-            </TouchableOpacity>
-        </View>
+            </TouchableOpacity >
+        </View >
     );
 }
 
