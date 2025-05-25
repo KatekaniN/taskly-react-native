@@ -17,10 +17,11 @@ export default function Layout() {
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: -4, // Move the entire button up slightly
                                     paddingHorizontal: 10,
                                     minWidth: 48,
-                                    justifyContent: 'center'
+                                    justifyContent: 'center',
+                                    height: 44,
+                                    transform: [{ translateY: -4 }], // Move the entire button up
                                 }}
                             >
                                 <FontAwesome5
