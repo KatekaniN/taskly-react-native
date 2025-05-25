@@ -1,15 +1,9 @@
-import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation, Platform, UIManager } from "react-native";
+import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation } from "react-native";
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
 import { useState, useRef, useEffect, use } from "react";
 import * as Haptics from 'expo-haptics';
 import { getFromStorage, saveToStorage } from "../utils/storage";
-
-if (Platform.OS === 'android') {
-  if (UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
-}
 
 type ShoppingListItemType = {
   id: string;

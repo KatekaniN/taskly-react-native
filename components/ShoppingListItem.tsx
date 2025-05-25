@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontSize: 28,
-        color: theme.colorCerulean,
+        color: theme.colorBlack,
         flex: 1,
         fontWeight: 200,
     },

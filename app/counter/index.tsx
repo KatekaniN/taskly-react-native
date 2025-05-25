@@ -1,4 +1,3 @@
-// app/counter.tsx
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function CounterScreen() {
