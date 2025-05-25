@@ -6,14 +6,19 @@ export default function CounterScreen() {
     /*const handleRequestPermission = async () => {
         const result = await registerForPushNotificationsAsync();
         console.log("Notification permission status:", result);
-    }*/
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.buttonText}>Request Permission</Text>
-            <TouchableOpacity activeOpacity={0.8} style={styles.button} /* onPress={handleRequestPermission} */>
+            <TouchableOpacity activeOpacity={0.8} style={styles.button}  onPress={handleRequestPermission} >
                 <Text style={styles.buttonText}>Request Permission</Text>
             </TouchableOpacity >
         </View >
+    );*/
+
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Test Text</Text>
+        </View>
     );
 }
 
