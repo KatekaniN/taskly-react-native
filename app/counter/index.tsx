@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         letterSpacing: 1,
-        color: theme.colorGrey,
+        color: theme.colorWhite,
         fontWeight: "bold",
         textTransform: "uppercase",
     },
