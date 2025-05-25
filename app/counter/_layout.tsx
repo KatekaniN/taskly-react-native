@@ -14,7 +14,7 @@ export default function Layout() {
                         <Link href="/counter/history" asChild>
                             <Pressable
                                 hitSlop={32}
-                                style={{ marginRight: 22, paddingRight: 12 }}
+                                style={{ marginRight: -22 , marginTop: -4 }}
                             >
                                 <FontAwesome5 name="history"
                                     size={22}
