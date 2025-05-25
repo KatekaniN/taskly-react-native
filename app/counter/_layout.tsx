@@ -21,7 +21,7 @@ export default function Layout() {
                                     minWidth: 48,
                                     justifyContent: 'center',
                                     height: 44,
-                                    transform: [{ translateY: -4 }], // Move the entire button up
+                                    transform: [{ translateY: 0 }],
                                 }}
                             >
                                 <FontAwesome5
