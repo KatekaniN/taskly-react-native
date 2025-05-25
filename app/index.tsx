@@ -2,7 +2,8 @@ import { StyleSheet, View, FlatList, TextInput, Text, LayoutAnimation, Platform,
 import ShoppingListItem from "../components/ShoppingListItem";
 import { theme } from "../theme";
 import { useState, useRef, useEffect, use } from "react";
-import { getFromStorage, saveToStorage } from "../utils/storage"; // Importing utility functions for storage
+import * as Haptics from 'expo-haptics';
+import { getFromStorage, saveToStorage } from "../utils/storage";
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -41,7 +42,7 @@ export default function App() {
       ];
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setShoppingList(newShoppingList);
-      saveToStorage(storageKey, newShoppingList); // Save the new list, not the old one
+      saveToStorage(storageKey, newShoppingList);
       setInput("");
     }
   };
@@ -51,7 +52,8 @@ export default function App() {
       (item) => item.id !== id)
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
-    saveToStorage(storageKey, newShoppingList); // Save the new list
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    saveToStorage(storageKey, newShoppingList);
   }
 
   function orderShoppingList(shoppingList: ShoppingListItemType[]) {
@@ -89,7 +91,7 @@ export default function App() {
     })
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShoppingList(newShoppingList);
-    saveToStorage(storageKey, newShoppingList); // Save the new list
+    saveToStorage(storageKey, newShoppingList);
   }
 
   useEffect(() => {
@@ -97,7 +99,6 @@ export default function App() {
       try {
         const data = await getFromStorage(storageKey);
         if (data) {
-          // Only animate if there's actual data to show
           if (data.length > 0) {
             LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
           }
