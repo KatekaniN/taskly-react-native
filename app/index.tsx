@@ -80,6 +80,12 @@ export default function App() {
 
   const handleToggleComplete = (id: string) => {
     const newShoppingList = shoppingList.map((item) => {
+      if (item.completedAtTimestamp) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      }
+      else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }
       if (item.id === id) {
         return {
           ...item,
