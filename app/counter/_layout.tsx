@@ -17,8 +17,9 @@ export default function Layout() {
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    paddingHorizontal: 16, // Use padding instead of margins
-                                    minWidth: 44, // Ensure adequate touch target
+                                    paddingTop:-10, 
+                                    paddingHorizontal: 10, 
+                                    minWidth: 48, 
                                     justifyContent: 'center'
                                 }}
                             >
