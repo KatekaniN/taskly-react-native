@@ -8,9 +8,9 @@ export default function CounterScreen() {
         console.log("Notification permission status:", result);
     }*/
     return (
-        <View >
-            <TouchableOpacity activeOpacity={0.8}  >
-                <Text >Request Permission</Text>
+        <View style={styles.container}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.button}   >
+                <Text style={styles.buttonText}>Request Permission</Text>
             </TouchableOpacity >
         </View >
     );
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         letterSpacing: 1,
-        color: theme.colorWhite,
+
         fontWeight: "bold",
         textTransform: "uppercase",
     },
     button: {
-        backgroundColor: theme.colorBlack,
+
         padding: 16,
         borderRadius: 8,
     }
