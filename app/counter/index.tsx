@@ -9,10 +9,9 @@ export default function CounterScreen() {
     }
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleRequestPermission}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handleRequestPermission}>
                 <Text style={styles.buttonText}>Request Permission</Text>
             </TouchableOpacity>
-
         </View>
     );
 }
