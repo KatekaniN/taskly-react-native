@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { theme } from "../../theme";
 import { registerForPushNotificationsAsync } from "../../utils/registerForPushNotificationsAsync";
 import * as Device from "expo-device";
@@ -13,9 +13,9 @@ type CountdownStatus = {
     distance: Duration // This is a type that represents the duration of the countdown
 }
 
-const countdownStorageKey = "taskly-countdown";
+export const countdownStorageKey = "taskly-countdown";
 
-type PersistedCountdownState = {
+export type PersistedCountdownState = {
     currentNotificationId: string | undefined;
     completedAtTimestampS: number[]
 }
@@ -23,6 +23,7 @@ type PersistedCountdownState = {
 const frequency = 10 * 1000;
 
 export default function CounterScreen() {
+    const [isLoading, setIsLoading] = useState(true);
 
     const [countdownState, setCountdownState] = useState<PersistedCountdownState>()
 
@@ -38,6 +39,7 @@ export default function CounterScreen() {
         const init = async () => {
             const value = await getFromStorage(countdownStorageKey);
             setCountdownState(value)
+            setIsLoading(false);
         }
         init();
     }, []);
@@ -45,6 +47,9 @@ export default function CounterScreen() {
     useEffect(() => {
         const intervalId = setInterval(() => {
             const timeStamp = lastCompletedAtTimestamp ? lastCompletedAtTimestamp + frequency : Date.now(); // Use the last completed timestamp or current time 
+            if (lastCompletedAtTimestamp) {
+                setIsLoading(false); // Set loading to false only after the first timestamp is set
+            }
             const isOverdue = isBefore(timeStamp, Date.now()); // Check if the current time is before the timestamp
             const distance = intervalToDuration(isOverdue ? { start: timeStamp, end: Date.now() } : { start: Date.now(), end: timeStamp }); // Calculate the distance only if not overdue
             setStatus({
@@ -87,8 +92,16 @@ export default function CounterScreen() {
         await saveToStorage(countdownStorageKey, newCountdownState);
     }
 
+    if (isLoading) {
+        return (
+            <View style={styles.activityIndicatorContainer}>
+                <ActivityIndicator size="large" color={theme.colorCerulean} />
+            </View>
+        );
+    }
+
     return (
-        <View style={[styles.container, status.isOverdue ? styles.containerLate : { backgroundColor: theme.colorCerulean }]}>
+        <View style={[styles.container, status.isOverdue ? styles.containerLate : { backgroundColor: theme.colorWhite }]}>
             {status.isOverdue ? (
                 <Text style={[styles.heading, styles.whiteText]}> Thing overdue by: </Text>
             ) :
@@ -158,5 +171,10 @@ const styles = StyleSheet.create({
     whiteText: {
         color: theme.colorWhite,
         fontWeight: "bold",
+    }, activityIndicatorContainer: {
+        backgroundColor: theme.colorWhite,
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
     }
 });
