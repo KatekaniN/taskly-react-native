@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: theme.colorWhite,
         padding: 16,
-    }, listEmptyContainer: {
+    },
+     listEmptyContainer: {
         justifyContent: "center",
         alignItems: "center",
         marginVertical: 18
