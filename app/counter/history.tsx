@@ -24,7 +24,7 @@ export default function HistoryScreen() {
             style={styles.list}
             contentContainerStyle={styles.contentContainer}
             ListEmptyComponent={<View style={styles.listEmptyContainer}>
-                <Text>Your shopping list is empty</Text>
+                <Text>Your history list is empty</Text>
             </View>}
             data={countdownState?.completedAtTimestampS}
             renderItem={({ item }) =>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colorWhite,
         padding: 16,
     },
-     listEmptyContainer: {
+    listEmptyContainer: {
         justifyContent: "center",
         alignItems: "center",
         marginVertical: 18

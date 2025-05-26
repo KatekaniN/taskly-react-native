@@ -111,10 +111,10 @@ export default function CounterScreen() {
     return (
         <View style={[styles.container, status.isOverdue ? styles.containerLate : { backgroundColor: theme.colorWhite }]}>
             {status.isOverdue ? (
-                <Text style={[styles.heading, styles.whiteText]}> Washing the car is overdue by: </Text>
+                <Text style={[styles.heading, styles.whiteText]}> Car wash is overdue by: </Text>
             ) :
                 <Text style={styles.heading}>
-                    Wash the car is due in: </Text>}
+                    Car wash is due in: </Text>}
             <View style={styles.row}>
                 <TimeSegment
                     number={status.distance.days ?? 0}
