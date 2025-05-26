@@ -103,9 +103,8 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colorRed,
     },
     buttonText: {
-        backgroundColor: theme.colorBlack,
         letterSpacing: 1,
-        fontSize: 24,
+        fontSize: 18,
         color: theme.colorWhite,
         fontWeight: "bold",
         textTransform: "uppercase",
@@ -122,6 +121,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         fontWeight: "bold",
+        marginBottom: 24,
         color: theme.colorBlack,
     },
     whiteText: {
