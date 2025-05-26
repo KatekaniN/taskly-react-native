@@ -103,7 +103,9 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colorRed,
     },
     buttonText: {
+        backgroundColor: theme.colorBlack,
         letterSpacing: 1,
+        fontSize: 24,
         color: theme.colorWhite,
         fontWeight: "bold",
         textTransform: "uppercase",
@@ -124,7 +126,6 @@ const styles = StyleSheet.create({
     },
     whiteText: {
         color: theme.colorWhite,
-        fontSize: 16,
         fontWeight: "bold",
     }
 });
