@@ -59,10 +59,10 @@ export default function CounterScreen() {
     return (
         <View style={[styles.container, status.isOverdue ? styles.containerLate : { backgroundColor: theme.colorCerulean }]}>
             {status.isOverdue ? (
-                <Text style={[styles.heading, styles.whiteText]}> Thing overdue by</Text>
+                <Text style={[styles.heading, styles.whiteText]}> Thing overdue by: </Text>
             ) :
                 <Text style={styles.heading}>
-                    Thing due in ...</Text>}
+                    Thing due in: </Text>}
             <View style={styles.row}>
                 <TimeSegment
                     number={status.distance.days ?? 0}
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     heading: {
-        fontSize: 24,
+        fontSize: 36,
         fontWeight: "bold",
         marginBottom: 24,
         color: theme.colorBlack,
