@@ -71,17 +71,17 @@ export default function CounterScreen() {
                 />
                 <TimeSegment
                     unit="Hours"
-                    number={status.distance.days ?? 0}
+                    number={status.distance.hours ?? 0}
                     textStyle={status.isOverdue ? styles.whiteText : undefined}
                 />
                 <TimeSegment
                     unit="Minutes"
-                    number={status.distance.days ?? 0}
+                    number={status.distance.minutes ?? 0}
                     textStyle={status.isOverdue ? styles.whiteText : undefined}
                 />
                 <TimeSegment
                     unit="Seconds"
-                    number={status.distance.days ?? 0}
+                    number={status.distance.seconds ?? 0}
                     textStyle={status.isOverdue ? styles.whiteText : undefined}
                 />
             </View>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
     },
     button: {
-        backgroundColor: theme.colorCerulean,
+        backgroundColor: theme.colorBlack,
         padding: 16,
         borderRadius: 8,
     },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         fontWeight: "bold",
-        color: theme.colorCerulean,
+        color: theme.colorBlack,
     },
     whiteText: {
         color: theme.colorWhite,
